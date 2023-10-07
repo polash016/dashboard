@@ -14,11 +14,12 @@ import {
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import { PiChatsLight } from "react-icons/pi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 
 const Registration = () => {
   // const [success, setSuccess] = useState("");
+  const navigate = useNavigate();
   const { createUser } = useAuth();
   const [error, setError] = useState("");
   const [show, setShow] = useState(false);
@@ -38,6 +39,7 @@ const Registration = () => {
     createUser(email, password).then((result) => {
       const user = result.user;
       console.log(user);
+      navigate("/");
       setError("");
     });
   };

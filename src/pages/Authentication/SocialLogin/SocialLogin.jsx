@@ -2,9 +2,18 @@
 import { AbsoluteCenter, Box, Button, Divider } from "@chakra-ui/react";
 import { FcGoogle } from "react-icons/fc";
 import { FaApple } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../../hooks/useAuth";
 
 const SocialLogin = ({ route, title, text }) => {
+  const navigate = useNavigate();
+  const { googleLogin } = useAuth();
+  const handleGoogleLogin = () => {
+    googleLogin().then((result) => {
+      console.log(result);
+      navigate("/");
+    });
+  };
   return (
     <>
       <Box position="relative" padding="2">
@@ -14,7 +23,11 @@ const SocialLogin = ({ route, title, text }) => {
         </AbsoluteCenter>
       </Box>
       <div className="flex gap-2 justify-center items-center">
-        <Button colorScheme="gray" variant="outline">
+        <Button
+          onClick={handleGoogleLogin}
+          colorScheme="gray"
+          variant="outline"
+        >
           <FcGoogle className="text-2xl" />
         </Button>
         <Button colorScheme="gray" variant="outline">

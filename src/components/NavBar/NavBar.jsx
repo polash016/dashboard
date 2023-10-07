@@ -11,8 +11,14 @@ import {
 } from "@chakra-ui/react";
 import { ArrowDownIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const NavBar = () => {
+  const { user, logOut } = useAuth();
+
+  const handleLogout = () => {
+    logOut();
+  };
   return (
     <div>
       <Box bg="white" px={4}>
@@ -49,7 +55,11 @@ const NavBar = () => {
                 <MenuItem>Link 2</MenuItem>
                 <MenuDivider />
                 <MenuItem>
-                  <Link to="/login">Log In</Link>
+                  {user ? (
+                    <Link onClick={handleLogout}>Log Out</Link>
+                  ) : (
+                    <Link to="/login">Log In</Link>
+                  )}
                 </MenuItem>
               </MenuList>
             </Menu>
