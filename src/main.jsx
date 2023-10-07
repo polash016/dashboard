@@ -13,6 +13,7 @@ import Registration from "./pages/Authentication/Registration/Registration";
 import ForgetEmail from "./pages/Authentication/ForgetPassword/ForgetEmail";
 import ResetPassword from "./pages/Authentication/ForgetPassword/ResetPassword";
 import SuccessReset from "./pages/Authentication/ForgetPassword/SuccessReset";
+import AuthProvider from "./Provider/AuthProvider";
 
 const router = createBrowserRouter([
   {
@@ -62,7 +63,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ChakraProvider>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </ChakraProvider>
   </React.StrictMode>
 );
