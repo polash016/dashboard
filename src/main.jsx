@@ -2,14 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Login from "./pages/Authentication/Login/Login.jsx";
 import { ChakraProvider } from "@chakra-ui/react";
 import Layout from "./pages/Dashboard/Layout/Layout";
 import Search from "./pages/Dashboard/Search/Search";
 import AccountDetails from "./pages/Dashboard/AccountDetails/AccountDetails";
 import Support from "./pages/Dashboard/Support/Support";
 import MyReports from "./pages/Dashboard/MyReports/MyReports";
-import Registration from "./pages/Authentication/Registration/Registration";
 import AuthProvider from "./Provider/AuthProvider";
 
 const router = createBrowserRouter([
@@ -34,14 +32,6 @@ const router = createBrowserRouter([
         element: <MyReports />,
       },
     ],
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/register",
-    element: <Registration />,
   },
 ]);
 

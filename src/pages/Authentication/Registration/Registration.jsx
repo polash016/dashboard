@@ -10,6 +10,12 @@ import {
   useColorModeValue,
   InputGroup,
   InputRightElement,
+  useDisclosure,
+  Modal,
+  ModalCloseButton,
+  ModalOverlay,
+  ModalContent,
+  ModalBody,
 } from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import SocialLogin from "../SocialLogin/SocialLogin";
@@ -24,6 +30,7 @@ const Registration = () => {
   const [error, setError] = useState("");
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleRegistration = (e) => {
     e.preventDefault();
@@ -44,77 +51,104 @@ const Registration = () => {
     });
   };
   return (
-    <form onSubmit={handleRegistration}>
-      <Flex
-        className="w-full"
-        align={"center"}
-        justify={"center"}
+    <div>
+      <button onClick={onOpen}>Create An Account</button>
+
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
         bg={useColorModeValue("gray.50", "gray.800")}
       >
-        <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
-          <Stack align={"center"}>
-            <PiChatsLight className="text-6xl" />
-            <Heading fontSize={"2xl"}>Create New Account</Heading>
-          </Stack>
-          <Box rounded={"lg"} bg={useColorModeValue("white", "gray.700")} p={8}>
-            <Stack spacing={4}>
-              <FormControl id="email">
-                <Input type="email" name="email" placeholder="Email" />
-              </FormControl>
-              {error && <p className="text-xs text-orange-600">{error}</p>}
-              <InputGroup size="md">
-                <Input
-                  pr="4.5rem"
-                  name="password"
-                  type={show ? "text" : "password"}
-                  placeholder="Password"
-                />
-                <InputRightElement width="4.5rem">
-                  <button onClick={handleClick}>
-                    {show ? <ViewOffIcon /> : <ViewIcon />}
-                  </button>
-                </InputRightElement>
-              </InputGroup>
-              <InputGroup size="md">
-                <Input
-                  name="confirmPass"
-                  pr="4.5rem"
-                  type={show ? "text" : "password"}
-                  placeholder="Confirm password"
-                />
-                <InputRightElement width="4.5rem">
-                  <button onClick={handleClick}>
-                    {show ? <ViewOffIcon /> : <ViewIcon />}
-                  </button>
-                </InputRightElement>
-              </InputGroup>
-              <Stack>
-                <Button
-                  type="submit"
-                  bg={"blue.400"}
-                  color={"white"}
-                  _hover={{
-                    bg: "blue.500",
-                  }}
-                >
-                  Sign Up
-                </Button>
-                <div>
-                  <span className="text-xs text-gray-600">
-                    By Signing Up You Agree to our
-                  </span>
-                  <Link className="text-blue-600 text-xs">
-                    {" "}
-                    Terms & Condition
-                  </Link>
-                </div>
-              </Stack>
-            </Stack>
-          </Box>
-          <SocialLogin route="/login" title="Log In" text="Already a Member?" />
-        </Stack>
-      </Flex>
-    </form>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalCloseButton />
+          <ModalBody>
+            <form onSubmit={handleRegistration}>
+              <Flex
+                w="full"
+                className="w-full"
+                align={"center"}
+                justify={"center"}
+              >
+                <Stack spacing={4} mx={"auto"} w="full" py={2}>
+                  <Stack align={"center"}>
+                    <PiChatsLight className="text-4xl" />
+                    <Heading fontSize={"xl"}>Create New Account</Heading>
+                  </Stack>
+                  <Box
+                    rounded={"lg"}
+                    bg={useColorModeValue("white", "gray.700")}
+                    p={8}
+                  >
+                    <Stack spacing={4}>
+                      <FormControl id="email">
+                        <Input
+                          size="sm"
+                          type="email"
+                          name="email"
+                          placeholder="Email"
+                        />
+                      </FormControl>
+                      {error && (
+                        <p className="text-xs text-orange-600">{error}</p>
+                      )}
+                      <InputGroup size="sm">
+                        <Input
+                          pr="4.5rem"
+                          name="password"
+                          type={show ? "text" : "password"}
+                          placeholder="Password"
+                        />
+                        <InputRightElement width="4.5rem">
+                          <button onClick={handleClick}>
+                            {show ? <ViewOffIcon /> : <ViewIcon />}
+                          </button>
+                        </InputRightElement>
+                      </InputGroup>
+                      <InputGroup size="sm">
+                        <Input
+                          name="confirmPass"
+                          pr="4.5rem"
+                          type={show ? "text" : "password"}
+                          placeholder="Confirm password"
+                        />
+                        <InputRightElement width="4.5rem">
+                          <button onClick={handleClick}>
+                            {show ? <ViewOffIcon /> : <ViewIcon />}
+                          </button>
+                        </InputRightElement>
+                      </InputGroup>
+                      <Stack>
+                        <Button
+                          type="submit"
+                          bg={"#1A2A83"}
+                          color={"white"}
+                          _hover={{
+                            bg: "#7F77D4",
+                          }}
+                        >
+                          Sign Up
+                        </Button>
+                        <div>
+                          <span className="text-xs text-gray-600">
+                            By Signing Up You Agree to our
+                          </span>
+                          <Link className="text-blue-600 text-xs">
+                            {" "}
+                            Terms & Condition
+                          </Link>
+                        </div>
+                      </Stack>
+                    </Stack>
+                  </Box>
+                  <SocialLogin route="login" />
+                </Stack>
+              </Flex>
+            </form>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+    </div>
   );
 };
 

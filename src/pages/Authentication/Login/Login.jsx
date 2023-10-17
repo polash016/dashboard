@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import {
   Flex,
@@ -23,7 +24,7 @@ import { PiChatsLight } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 
-const Login = () => {
+const Login = ({ text }) => {
   // const [success, setSuccess] = useState("");
   // const [error, setError] = useState("");
   const { signIn } = useAuth();
@@ -48,8 +49,8 @@ const Login = () => {
 
   return (
     <div>
+      {text && <span className="text-gray-500">{text}</span>}
       <button onClick={onOpen}>Login</button>
-
       <Modal
         isOpen={isOpen}
         onClose={onClose}
@@ -107,11 +108,7 @@ const Login = () => {
                       </Stack>
                     </Stack>
                   </Box>
-                  <SocialLogin
-                    route="/register"
-                    title="Create new Account"
-                    text=""
-                  />
+                  <SocialLogin route="register" />
                 </Stack>
               </Flex>
             </form>

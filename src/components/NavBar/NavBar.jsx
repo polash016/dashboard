@@ -12,6 +12,7 @@ import { ArrowDownIcon } from "@chakra-ui/icons";
 import useAuth from "../../hooks/useAuth";
 import { PiUserCirclePlus } from "react-icons/pi";
 import Login from "../../pages/Authentication/Login/Login";
+import { AiOutlineUser } from "react-icons/ai";
 
 const NavBar = () => {
   const { user, logOut } = useAuth();
@@ -33,20 +34,32 @@ const NavBar = () => {
           <Flex alignItems={"center"}>
             {user ? (
               <Menu>
+                <div className="flex items-center gap-1">
+                  <AiOutlineUser />
+                  <span className="text-xs">{user.email}</span>
+                </div>
                 <MenuButton
                   as={Button}
                   rounded={"full"}
                   variant={"link"}
                   cursor={"pointer"}
                   minW={0}
+                  pl={1}
                 >
-                  <PiUserCirclePlus />
-                  <span>{user.email}</span>
                   <ArrowDownIcon />
                 </MenuButton>
-                <MenuList>
-                  <MenuItem>View Profile</MenuItem>
-                  <MenuItem onClick={handleLogout}>LogOut</MenuItem>
+                <MenuList px={"10"}>
+                  <MenuItem fontSize="x-small" bg={"none"} textColor="blue.600">
+                    View Profile
+                  </MenuItem>
+                  <MenuItem
+                    bg={"none"}
+                    fontSize="x-small"
+                    textColor="blue.600"
+                    onClick={handleLogout}
+                  >
+                    LogOut
+                  </MenuItem>
                 </MenuList>
               </Menu>
             ) : (

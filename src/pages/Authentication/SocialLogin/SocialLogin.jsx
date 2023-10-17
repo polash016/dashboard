@@ -2,10 +2,12 @@
 import { AbsoluteCenter, Box, Button, Divider } from "@chakra-ui/react";
 import { FcGoogle } from "react-icons/fc";
 import { FaApple } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
+import Registration from "../Registration/Registration";
+import Login from "../Login/Login";
 
-const SocialLogin = ({ route, title, text }) => {
+const SocialLogin = ({ route }) => {
   const navigate = useNavigate();
   const { googleLogin } = useAuth();
   const handleGoogleLogin = () => {
@@ -35,8 +37,11 @@ const SocialLogin = ({ route, title, text }) => {
         </Button>
       </div>
       <div className="text-center text-blue-600">
-        <span className="text-gray-500">{text}</span>
-        <Link to={route}>{title}</Link>
+        {route == "register" ? (
+          <Registration />
+        ) : (
+          <Login text="Already a Member? " />
+        )}
       </div>
     </>
   );
