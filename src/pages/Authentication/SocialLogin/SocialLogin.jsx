@@ -16,7 +16,7 @@ const SocialLogin = ({ route, title, text }) => {
   };
   return (
     <>
-      <Box position="relative" padding="2">
+      <Box position="relative">
         <Divider />
         <AbsoluteCenter color="gray.500" bg="white" px="4">
           or continue with

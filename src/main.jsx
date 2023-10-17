@@ -10,9 +10,6 @@ import AccountDetails from "./pages/Dashboard/AccountDetails/AccountDetails";
 import Support from "./pages/Dashboard/Support/Support";
 import MyReports from "./pages/Dashboard/MyReports/MyReports";
 import Registration from "./pages/Authentication/Registration/Registration";
-import ForgetEmail from "./pages/Authentication/ForgetPassword/ForgetEmail";
-import ResetPassword from "./pages/Authentication/ForgetPassword/ResetPassword";
-import SuccessReset from "./pages/Authentication/ForgetPassword/SuccessReset";
 import AuthProvider from "./Provider/AuthProvider";
 
 const router = createBrowserRouter([
@@ -45,18 +42,6 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Registration />,
-  },
-  {
-    path: "/forget",
-    element: <ForgetEmail />,
-  },
-  {
-    path: "/reset",
-    element: <ResetPassword />,
-  },
-  {
-    path: "/success",
-    element: <SuccessReset />,
   },
 ]);
 

@@ -7,11 +7,11 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  MenuDivider,
 } from "@chakra-ui/react";
 import { ArrowDownIcon } from "@chakra-ui/icons";
-import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import { PiUserCirclePlus } from "react-icons/pi";
+import Login from "../../pages/Authentication/Login/Login";
 
 const NavBar = () => {
   const { user, logOut } = useAuth();
@@ -20,7 +20,7 @@ const NavBar = () => {
     logOut();
   };
   return (
-    <div>
+    <div className="border border-b-gray-400">
       <Box bg="white" px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <HStack spacing={8} alignItems={"center"}>
@@ -31,15 +31,8 @@ const NavBar = () => {
             ></HStack>
           </HStack>
           <Flex alignItems={"center"}>
-            <Menu>
-              <div className="flex gap-3 justify-center items-center">
-                <button className="bg-gray-300 border rounded-full px-2 py-1 text-xs h-8">
-                  AB
-                </button>
-                <div>
-                  <h4 className="text-sm">Name</h4>
-                  <p className="text-xs text-gray-500">email@gmail.com</p>
-                </div>
+            {user ? (
+              <Menu>
                 <MenuButton
                   as={Button}
                   rounded={"full"}
@@ -47,22 +40,21 @@ const NavBar = () => {
                   cursor={"pointer"}
                   minW={0}
                 >
+                  <PiUserCirclePlus />
+                  <span>{user.email}</span>
                   <ArrowDownIcon />
                 </MenuButton>
+                <MenuList>
+                  <MenuItem>View Profile</MenuItem>
+                  <MenuItem onClick={handleLogout}>LogOut</MenuItem>
+                </MenuList>
+              </Menu>
+            ) : (
+              <div className="flex items-center gap-1 border border-gray-400 rounded-lg px-4 py-0.5 font-semibold text-sm">
+                <PiUserCirclePlus className="text-xl" />
+                <Login />
               </div>
-              <MenuList>
-                <MenuItem>Link 1</MenuItem>
-                <MenuItem>Link 2</MenuItem>
-                <MenuDivider />
-                <MenuItem>
-                  {user ? (
-                    <Link onClick={handleLogout}>Log Out</Link>
-                  ) : (
-                    <Link to="/login">Log In</Link>
-                  )}
-                </MenuItem>
-              </MenuList>
-            </Menu>
+            )}
           </Flex>
         </Flex>
       </Box>
